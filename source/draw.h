@@ -27,6 +27,7 @@
 #define COLOR_MAGENTA       RGB(0xFF, 0x00, 0xFF)
 #define COLOR_YELLOW        RGB(0xFF, 0xFF, 0x00)
 #define COLOR_GREY          RGB(0x77, 0x77, 0x77)
+#define COLOR_LIGHTGREY     RGB(0xB0, 0xB0, 0xB0)
 #define COLOR_TRANSPARENT   RGB(0xFF, 0x00, 0xEF) // otherwise known as 'super fuchsia'
 
 #ifndef USE_THEME
@@ -66,6 +67,7 @@ void ClearScreenFull(bool clear_top, bool clear_bottom);
 void DrawCharacter(unsigned char *screen, int character, int x, int y, int color, int bgcolor);
 void DrawString(unsigned char *screen, const char *str, int x, int y, int color, int bgcolor);
 void DrawStringF(int x, int y, bool use_top, const char *format, ...);
+void DrawStringFColor(int x, int y, bool use_top, int color, int bgcolor, const char *format, ...);
 
 void Screenshot(const char* path);
 void DebugClear();

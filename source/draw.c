@@ -68,6 +68,7 @@ void DrawString(u8* screen, const char *str, int x, int y, int color, int bgcolo
         DrawCharacter(screen, str[i], x + i * FONT_WIDTH, y, color, bgcolor);
 }
 
+
 void DrawStringF(int x, int y, bool use_top, const char *format, ...)
 {
     char str[512] = { 0 }; // 512 should be more than enough
@@ -84,6 +85,26 @@ void DrawStringF(int x, int y, bool use_top, const char *format, ...)
         } else {
             DrawString(BOT_SCREEN0, text, x, y, STD_COLOR_FONT, STD_COLOR_BG);
             DrawString(BOT_SCREEN1, text, x, y, STD_COLOR_FONT, STD_COLOR_BG);
+        }
+    }
+}
+
+void DrawStringFColor(int x, int y, bool use_top, int color, int bgcolor, const char *format, ...)
+{
+    char str[512] = { 0 }; // 512 should be more than enough
+    va_list va;
+
+    va_start(va, format);
+    vsnprintf(str, 512, format, va);
+    va_end(va);
+
+    for (char* text = strtok(str, "\n"); text != NULL; text = strtok(NULL, "\n"), y += 10) {
+        if (use_top) {
+            DrawString(TOP_SCREEN0, text, x, y, color, bgcolor);
+            DrawString(TOP_SCREEN1, text, x, y, color, bgcolor);
+        } else {
+            DrawString(BOT_SCREEN0, text, x, y, color, bgcolor);
+            DrawString(BOT_SCREEN1, text, x, y, color, bgcolor);
         }
     }
 }

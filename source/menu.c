@@ -107,7 +107,9 @@ void DrawMenu(MenuInfo* currMenu, u32 index, bool fullDraw, bool subMenu)
         
     for (u32 i = 0; i < currMenu->n_entries; i++) { // draw menu entries / selection []
         char* name = currMenu->entries[i].name;
-        DrawStringF(menublock_x0, menublock_y0 + (i*10), top_screen, (i == index) ? "[%s]" : " %s ", name);
+        u32 color = (i != index) ? COLOR_LIGHTGREY : !(currMenu->entries[i].param & (N_NANDWRITE|N_A9LHWRITE)) ? COLOR_GREEN :
+            (currMenu->entries[i].param & N_EMUNAND) ? COLOR_YELLOW : COLOR_RED;
+        DrawStringFColor(menublock_x0, menublock_y0 + (i*10), top_screen, color, STD_COLOR_BG, (i == index) ? "[%s]" : " %s ", name);
     }
 }
 
