@@ -84,23 +84,19 @@ void DrawMenu(MenuInfo* currMenu, u32 index, bool fullDraw, bool subMenu)
 {
     u32 emunand_state = CheckEmuNand();
     bool top_screen = true;
-    u32 menublock_x0 = (((top_screen) ? SCREEN_WIDTH_TOP : SCREEN_WIDTH_BOT) - 30 * FONT_WIDTH_EXT) / 2;
+    u32 menublock_x0 = (((top_screen) ? SCREEN_WIDTH_TOP : SCREEN_WIDTH_BOT) - 50 * FONT_WIDTH_EXT) / 2;
     u32 menublock_x1 = menublock_x0 - FONT_WIDTH_EXT;
     u32 menublock_y0 = 40;
     u32 menublock_y1 = menublock_y0 + currMenu->n_entries * 10;
     
     if (fullDraw) { // draw full menu
         ClearScreenFull(true, !top_screen);
-        DrawStringF(menublock_x0, menublock_y0 - 20, top_screen, "%s", currMenu->name);
-        DrawStringF(menublock_x0, menublock_y0 - 10, top_screen, "==============================");
-        DrawStringF(menublock_x0, menublock_y1 +  0, top_screen, "==============================");
-        DrawStringF(menublock_x0, menublock_y1 + 10, top_screen, (subMenu) ? "A: Choose  B: Return" : "A: Choose");
-        DrawStringF(menublock_x0, menublock_y1 + 20, top_screen, "SELECT: Unmount SD Card");
-        DrawStringF(menublock_x0, menublock_y1 + 30, top_screen, "START:  Reboot / [+\x1B] Poweroff");
-        DrawStringF(menublock_x1, SCREEN_HEIGHT - 20, top_screen, "SD card: %lluMB/%lluMB & %s", RemainingStorageSpace() / 1024 / 1024, TotalStorageSpace() / 1024 / 1024, (emunand_state == EMUNAND_READY) ? "EmuNAND ready" : (emunand_state == EMUNAND_GATEWAY) ? "GW EmuNAND" : (emunand_state == EMUNAND_REDNAND) ? "RedNAND" : (emunand_state > 3) ? "MultiNAND" : "no EmuNAND");
-        DrawStringF(menublock_x1, SCREEN_HEIGHT - 30, top_screen, "Game directory: %s", (GetGameDir()) ? GetGameDir() : "(not available)");
-        DrawStringF(menublock_x1, SCREEN_HEIGHT - 40, top_screen, "Work directory: %s", GetWorkDir());
-    }
+		FileGetData("lima/border.bin", TOP_SCREEN0, 400 * 240 * 3, 0);
+        DrawStringF(menublock_x0 - 25, menublock_y0 - 30, top_screen, "%s", currMenu->name);
+        DrawStringF(menublock_x0, menublock_y1 + 95, top_screen, (subMenu) ? "A: Choose  B: Return" : "A: Choose");
+        DrawStringF(menublock_x0, menublock_y1 + 105, top_screen, "SELECT: Unmount SD Card");
+        DrawStringF(menublock_x0, menublock_y1 + 115, top_screen, "START:  Reboot / [+\x1B] Poweroff");
+		}
     
     if (!top_screen)
         DrawStringF(10, 10, true, "Selected: %-*.*s", 32, 32, currMenu->entries[index].name);

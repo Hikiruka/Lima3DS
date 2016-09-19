@@ -8,6 +8,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef int8_t       s8;
+typedef int16_t      s16;
+typedef int32_t      s32;
+typedef int64_t      s64;
+
 #define u8 uint8_t
 #define u16 uint16_t
 #define u32 uint32_t
@@ -44,6 +49,9 @@
 // log file name
 #define LOG_FILE "Decrypt9.log"
 
+#define BASE_PATH       "/lima"
+#define PAYLOAD_PATH    BASE_PATH "/boot.bin"
+
 static inline u32 strchrcount(const char* str, char symbol) {
     u32 count = 0;
     for (u32 i = 0; str[i] != '\0'; i++) {
@@ -52,3 +60,5 @@ static inline u32 strchrcount(const char* str, char symbol) {
     }
     return count;
 }
+
+void chainload();
