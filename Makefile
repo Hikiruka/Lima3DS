@@ -16,7 +16,7 @@ include $(DEVKITARM)/ds_rules
 # INCLUDES is a list of directories containing header files
 # SPECS is the directory containing the important build and link files
 #---------------------------------------------------------------------------------
-export TARGET	:=	Lima3DS
+export TARGET	:=	ToolKitFW
 BUILD		:=	build
 SOURCES		:=	source source/fatfs source/decryptor source/gamecart source/abstraction  
 DATA		:=	data
@@ -39,7 +39,7 @@ CFLAGS	:=	-g -Wall -Wextra -Wpedantic -pedantic -O2\
 
 CFLAGS	+=	$(INCLUDE) -DEXEC_$(EXEC_METHOD) -DARM9 -D_GNU_SOURCE
 
-CFLAGS	+=	-DBUILD_NAME="\"$(TARGET) ("v1.0")\""
+CFLAGS	+=	-DBUILD_NAME="\"$(TARGET) ("v1.3")\""
 
 ifneq ($(strip $(THEME)),)
 CFLAGS	+=	-DUSE_THEME=\"\/$(THEME)\"
